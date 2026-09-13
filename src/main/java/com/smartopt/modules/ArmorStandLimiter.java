@@ -3,9 +3,12 @@ package com.smartopt.modules;
 import com.smartopt.core.OptConfig;
 import com.smartopt.core.OptimizationEngine;
 import org.bukkit.Chunk;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
+import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -70,10 +73,29 @@ public class ArmorStandLimiter {
         // Ưu tiên xóa: không tên -> có tên nhưng không trang bị -> có tên và có trang bị (giữ lại sau cùng).
         stands.sort(Comparator
                 .comparing((ArmorStand a) -> a.getCustomName() != null)
-                .thenComparing(ArmorStand::hasEquipment));
+                .thenComparing(ArmorStandLimiter::hasEquipment));
 
         for (int i = 0; i < surplus && i < stands.size(); i++) {
             stands.get(i).remove();
         }
+    }
+
+    /**
+     * ArmorStand không có sẵn hasEquipment() trong Bukkit/Paper API,
+     * nên tự kiểm tra từng slot (giáp + 2 tay) thông qua EntityEquipment.
+     */
+    private static boolean hasEquipment(ArmorStand stand) {
+        EntityEquipment eq = stand.getEquipment();
+        if (eq == null) return false;
+        return isPresent(eq.getHelmet())
+                || isPresent(eq.getChestplate())
+                || isPresent(eq.getLeggings())
+                || isPresent(eq.getBoots())
+                || isPresent(eq.getItemInMainHand())
+                || isPresent(eq.getItemInOffHand());
+    }
+
+    private static boolean isPresent(ItemStack item) {
+        return item != null && item.getType() != Material.AIR;
     }
 }
