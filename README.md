@@ -176,8 +176,8 @@ OptimizationEngine   -> 12 PASS / 0 FAIL   (chuyển mức, chống flap, hồi 
 RateLimiter           -> 5 PASS / 0 FAIL   (chặn redstone-clock nhanh, không chặn nhầm hành động thường)
 ProtectionRules        -> 7 PASS / 0 FAIL  (bảo vệ item/mob RPG + MythicMobs, cho phép dọn mob/item thường)
 JoinRampCalculator      -> 6 PASS / 0 FAIL (tăng dần đúng tuyến tính, không vượt target)
-GradientUtil            -> 9 PASS / 0 FAIL (dinh dang Hex legacy dung, gradient nhieu diem dung, mau TPS)
-HistoryFileWriter       -> 6 PASS / 0 FAIL (tao file dung, dinh dang CSV dung, xoay vong dung, giu header)
+GradientUtil            -> 9 PASS / 0 FAIL (định dạng Hex legacy đúng, gradient nhiều điểm đúng, màu TPS)
+HistoryFileWriter       -> 6 PASS / 0 FAIL (tạo file đúng, định dạng CSV đúng, xoay vòng đúng, giữ header)
 
 TỔNG: 45 PASS / 0 FAIL
 ```
@@ -224,5 +224,3 @@ trong config.yml.
 - Dashboard web xem TPS real-time (cần HTTP server nhúng)
 - Đa ngôn ngữ EN/VI cho GUI và tin nhắn (messages.yml theo locale)
 - Ngưỡng TPS riêng cho từng world (hiện chỉ có bật/tắt loại trừ world)
-
-Bạn cứ nói nếu muốn mình làm tiếp phần nào.
