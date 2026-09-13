@@ -13,7 +13,7 @@ public class AllSimulators {
 
     private static void run(String name, Class<?> cls) throws Exception {
         System.out.println("\n############################################");
-        System.out.println("# CHAY MO PHONG: " + name);
+        System.out.println("# Chạy Mô Phỏng: " + name);
         System.out.println("############################################");
         cls.getMethod("main", String[].class).invoke(null, (Object) new String[0]);
     }
