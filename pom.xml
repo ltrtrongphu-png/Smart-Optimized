@@ -37,7 +37,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- PlaceholderAPI: chi de bien dich (soft-depend), khong bat buoc phai co luc chay -->
+        <!-- PlaceholderAPI: chỉ để biên dịch (soft-depend), không bắt buộc phải có lúc chạy -->
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
@@ -45,7 +45,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- bStats: thong ke su dung plugin, duoc shade (nhung goi) truc tiep vao jar -->
+        <!-- bStats: thống kê sử dụng plugin, được shade (đóng gói) trực tiếp vào jar -->
         <dependency>
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bukkit</artifactId>
@@ -66,9 +66,9 @@
                 </configuration>
             </plugin>
 
-            <!-- Shade bStats vao trong jar cuoi cung va doi ten goi de tranh xung dot
-                 voi cac plugin khac cung dung bStats. BAT BUOC phai co buoc nay,
-                 neu khong plugin se bao loi ClassNotFoundException: org.bstats... -->
+            <!-- Shade bStats vào trong jar cuối cùng và đổi tên gói để tránh xung đột
+                 với các plugin khác cùng dùng bStats. BẮT BUỘC phải có bước này,
+                 nếu không plugin sẽ báo lỗi ClassNotFoundException: org.bstats... -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
