@@ -6,7 +6,7 @@ public class ProtectionRulesSimulator {
     private static int fail = 0;
 
     public static void main(String[] args) {
-        System.out.println("===== MO PHONG ProtectionRules =====\n");
+        System.out.println("===== Mô Phỏng ProtectionRules =====\n");
         scenario1_ItemThuong();
         scenario2_ItemRPGCoTenRieng();
         scenario3_ItemCoPdcTrenEntity();
@@ -14,7 +14,7 @@ public class ProtectionRulesSimulator {
         scenario5_MobMythicMobs();
         scenario6_MobDaThuanHoaHoacDayXich();
 
-        System.out.println("\n===== KET QUA: " + pass + " PASS / " + fail + " FAIL =====");
+        System.out.println("\n===== Kết Quả: " + pass + " PASS / " + fail + " FAIL =====");
         if (fail > 0) System.exit(1);
     }
 
@@ -24,60 +24,60 @@ public class ProtectionRulesSimulator {
     }
 
     private static void scenario1_ItemThuong() {
-        System.out.println("Kich ban 1: Item vanilla thuong (vd: cobblestone roi tu mo)");
+        System.out.println("Kịch bản 1: Item vanilla thường (vd: cobblestone rơi từ mỏ)");
         ProtectionRules.ItemFlags f = new ProtectionRules.ItemFlags();
         boolean protectedItem = ProtectionRules.isProtectedItem(f);
         System.out.println("  -> protected=" + protectedItem);
-        check("Item thuong PHAI duoc phep gop (khong protected)", !protectedItem);
+        check("Item thường PHẢI được phép gộp (không protected)", !protectedItem);
         System.out.println();
     }
 
     private static void scenario2_ItemRPGCoTenRieng() {
-        System.out.println("Kich ban 2: Item RPG co ten rieng + lore (vd: 'Kiem Rong Huyen Thoai')");
+        System.out.println("Kịch bản 2: Item RPG có tên riêng + lore (vd: 'Kiếm Rồng Huyền Thoại')");
         ProtectionRules.ItemFlags f = new ProtectionRules.ItemFlags();
         f.hasDisplayName = true;
         f.hasLore = true;
         boolean protectedItem = ProtectionRules.isProtectedItem(f);
         System.out.println("  -> protected=" + protectedItem);
-        check("Item RPG co ten rieng PHAI duoc bao ve (khong bi gop)", protectedItem);
+        check("Item RPG có tên riêng phải được bảo vệ (không bị gộp)", protectedItem);
         System.out.println();
     }
 
     private static void scenario3_ItemCoPdcTrenEntity() {
-        System.out.println("Kich ban 3: Item khong co ten nhung co PDC gan tren entity (plugin RPG gan ngam)");
+        System.out.println("Kịch bản 3: Item không có tên nhưng có PDC gắn trên entity (plugin RPG gắn ngầm)");
         ProtectionRules.ItemFlags f = new ProtectionRules.ItemFlags();
         f.hasEntityPdc = true;
         boolean protectedItem = ProtectionRules.isProtectedItem(f);
-        check("Item co PDC ngam tren entity van PHAI duoc bao ve", protectedItem);
+        check("Item có PDC ngầm trên entity vẫn PHẢI được bảo vệ", protectedItem);
         System.out.println();
     }
 
     private static void scenario4_MobVanillaThuong() {
-        System.out.println("Kich ban 4: Mob vanilla thuong tu farm (zombie khong ten, khong PDC)");
+        System.out.println("Kịch bản 4: Mob vanilla thường từ farm (zombie không tên, không PDC)");
         ProtectionRules.MobFlags f = new ProtectionRules.MobFlags();
         boolean protectedMob = ProtectionRules.isProtectedMob(f);
-        check("Mob thuong tu farm PHAI duoc phep don boi mob-cap", !protectedMob);
+        check("Mob thường từ farm PHẢI được phép dọn bởi mob-cap", !protectedMob);
         System.out.println();
     }
 
     private static void scenario5_MobMythicMobs() {
-        System.out.println("Kich ban 5: Mob boss cua MythicMobs (co tag dac trung)");
+        System.out.println("Kịch bản 5: Mob boss của MythicMobs (có tag đặc trưng)");
         ProtectionRules.MobFlags f = new ProtectionRules.MobFlags();
         f.hasMythicMobsTag = true;
         boolean protectedMob = ProtectionRules.isProtectedMob(f);
-        check("Mob MythicMobs PHAI duoc bao ve tuyet doi", protectedMob);
+        check("Mob MythicMobs phài được bảo vệ tuyệt đối", protectedMob);
         System.out.println();
     }
 
     private static void scenario6_MobDaThuanHoaHoacDayXich() {
-        System.out.println("Kich ban 6: Thu cung da thuan hoa / bi day xich cua nguoi choi");
+        System.out.println("Kịch bản 6: Thú cưng đã thuần hóa / bị dây xích của người chơi");
         ProtectionRules.MobFlags tamed = new ProtectionRules.MobFlags();
         tamed.isTamed = true;
         ProtectionRules.MobFlags leashed = new ProtectionRules.MobFlags();
         leashed.isLeashed = true;
 
-        check("Thu cung da thuan hoa PHAI duoc bao ve", ProtectionRules.isProtectedMob(tamed));
-        check("Mob bi day xich PHAI duoc bao ve", ProtectionRules.isProtectedMob(leashed));
+        check("Thú cưng đã thuần hóa phải được bảo vệ", ProtectionRules.isProtectedMob(tamed));
+        check("Mob bị dây xích PHẢI được bảo vệ", ProtectionRules.isProtectedMob(leashed));
         System.out.println();
     }
 }
