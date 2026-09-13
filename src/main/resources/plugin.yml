@@ -1,0 +1,22 @@
+name: SmartOptimizer
+version: '2.2.0'
+main: com.smartopt.SmartOptimizerPlugin
+api-version: '1.21'
+author: trongphu
+description: Tự động tối ưu server Paper dựa trên TPS thực tế, dành cho server SMP + RPG. GUI Hex-gradient.
+softdepend: [PlaceholderAPI, MythicMobs]
+
+commands:
+  smartoptimizer:
+    description: Quản lý plugin SmartOptimizer
+    aliases: [sopt, smartopt]
+    permission: smartoptimizer.admin
+    usage: /<command> <status|toggle|reload|simulate|diag|gui|history|topchunks>
+
+permissions:
+  smartoptimizer.admin:
+    description: Cho phép dùng lệnh quản lý SmartOptimizer
+    default: op
+  smartoptimizer.alerts:
+    description: Nhận thông báo khi server đổi mức tối ưu
+    default: op

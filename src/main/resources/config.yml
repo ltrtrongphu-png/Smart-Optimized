@@ -1,0 +1,91 @@
+# =========================================================
+# SmartOptimizer - config.yml
+# Mặc định plugin chạy TỰ ĐỘNG, bạn KHÔNG cần chỉnh gì cả.
+# Cách dễ chỉnh nhất: dùng lệnh "/sopt gui" trong game.
+# Chỉ mở file này nếu muốn tinh chỉnh sâu, hoặc dùng /sopt reload sau khi sửa.
+# =========================================================
+
+enabled: true
+
+# Ngưỡng TPS để chuyển mức tối ưu (thang TPS tối đa là 20)
+thresholds:
+  mild: 19.3
+  moderate: 17.0
+  severe: 14.0
+
+check-interval-seconds: 5
+
+# -1 = tự động lấy view-distance / simulation-distance hiện tại của mỗi world làm gốc.
+base-view-distance: -1
+base-simulation-distance: -1
+
+# Bật/tắt riêng từng module tối ưu
+modules:
+  view-distance: true       # giảm view/simulation distance khi TPS thấp
+  mob-spawn-limit: true     # giảm giới hạn spawn mob mới (không đụng đến mob đang có)
+  item-merge: true          # gộp item rơi gần nhau
+  hopper-throttle: true     # giảm tần suất chuyển item qua hopper khi lag nặng
+  redstone-limiter: true    # chặn máy lag redstone (clock quá nhanh)
+  mob-cap: false            # giới hạn số mob vanilla/chunk - MẶC ĐỊNH TẮT, can thiệp mạnh nhất
+  join-ramp: true           # tăng dần view-distance khi người chơi vừa vào, tránh spike TPS
+  xp-orb-merge: true        # gộp XP orb gần nhau (farm mob/grinder), không mất EXP người chơi
+  falling-block-limiter: false  # giới hạn cát/sỏi/TNT-dup đang rơi/chunk - MẶC ĐỊNH TẮT
+  armor-stand-limiter: false    # giới hạn 16 armor stand/chunk - MẶC ĐỊNH TẮT
+
+item-merge:
+  check-interval-seconds: 3
+  skip-named-or-lored-items: true   # bỏ qua item có tên/lore/enchant/PDC (đồ RPG đặc biệt)
+
+redstone-limiter:
+  max-events-per-window: 12   # tối đa bao nhiêu lần đổi tín hiệu tại 1 block trong 1 cửa sổ
+  window-millis: 1000         # độ dài cửa sổ (miligiây)
+
+mob-cap:
+  per-chunk: 12                  # số mob vanilla không bảo vệ tối đa / chunk
+  check-interval-seconds: 20
+  only-when-lagging: true        # chỉ dọn khi đang ở mức MODERATE/SEVERE
+
+join-ramp:
+  start-distance: 4          # view/sim distance khi người chơi vừa vào
+  duration-seconds: 12       # thời gian tăng dần lên mức đầy đủ
+
+falling-block-limiter:
+  cap-per-chunk: 40           # số khối đang rơi (cát/sỏi/bê tông bọt) tối đa / chunk
+  check-interval-seconds: 10
+  only-when-lagging: true     # chỉ dọn khi đang ở mức MODERATE/SEVERE
+
+armor-stand-limiter:
+  cap-per-chunk: 16            # số armor stand tối đa / chunk (đủ cho trưng bày thông thường)
+  check-interval-seconds: 15
+  only-when-lagging: true      # chỉ dọn khi đang ở mức MODERATE/SEVERE
+  # Ưu tiên xóa armor stand KHÔNG TÊN trước; chỉ đụng đến cái có tên khi
+  # đã xóa hết cái không tên mà vẫn còn vượt cap-per-chunk.
+
+history-file:
+  enabled: true                # ghi lịch sử TPS ra file CSV, sống sót qua restart
+  file-name: history.csv       # nằm trong thư mục dữ liệu của plugin
+  max-lines: 20000             # tự động xoay vòng (giữ nửa sau) khi vượt quá
+
+top-chunks:
+  default-limit: 5             # số chunk hiển thị mặc định khi gõ /sopt topchunks
+
+mythicmobs-compat:
+  auto-detect: true          # tự động phát hiện MythicMobs và bảo vệ mob/item của nó
+
+# Các world trong danh sách này sẽ KHÔNG bị SmartOptimizer can thiệp gì cả
+# ví dụ: world-exclusions: ["creative_build", "event_world"]
+world-exclusions: []
+
+discord:
+  enabled: false
+  webhook-url: ""
+  notify-on-severe: true
+  notify-on-recovery: true
+
+placeholderapi:
+  enabled: true   # chỉ có hiệu lực nếu server có cài PlaceholderAPI
+
+bstats-enabled: true
+
+notify-admins-on-level-change: true
+log-to-console-on-level-change: true
